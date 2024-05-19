@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carrera Track</title>
+    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
+      integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
+      crossorigin="anonymous"
+      referrerpolicy="no-referrer"
+    />
+  </head>
+  <body>
+    <header>
+      <nav id="navbar">
+        <div class="logoAndName">
+          <img
+            src="./img/Golden logo.png"
+            alt="Logo de CarreraTrack"
+            class="logo"
+          />
+          <h1 class="title">
+            Carrera <span class="golden-span">Track</span>
+            <span class="version-span">Pre-Alpha</span>
+          </h1>
+        </div>
+        <div class="menu">
+          <div id="show-menu">
+            <i class="fa-solid fa-bars"></i>
+          </div>
+          <div class="hide" id="close-menu">
+            <i class="fa-solid fa-circle-xmark"></i>
+          </div>
+        </div>
+        <div class="blur-screen hide"></div>
+        <div class="carreras-list-container hide-right">
+          <div class="tituloYLista">
+            <h2>Elige tu carrera!</h2>
+          </div>
+          <!-- <div class="tituloYLista">
+            <h2>Elige tu carrera!</h2>
+            <ul class="carreras-list">
+              <li id="tecnicaturaEnDesarolloWeb">
+                Tecnicatura en Desarollo Web
+              </li>
+              <li id="ingenieriaEnInformatica">Ingenieria en informatica</li>
+            </ul>
+          </div>
+          <p>Proyecto Creado por <span id="golden-span">Nicolas Diaz</span></p> -->
+          <p>
+            Proyecto Creado por <span class="golden-span">Nicolas Diaz</span>
+          </p>
+        </div>
+      </nav>
+    </header>
+    <main id="main">
+      <div class="landingPage">
+        <div class="title-description">
+          <h2>Carrera Track</h2>
+          <p>
+            Controla el progreso de tu carrera y descubri al instante que
+            materias estan disponibles para anotarte!
+          </p>
+        </div>
+        <div class="instrucciones">
+          <h3>Instrucciones</h3>
+          <h3>
+            Modo Set: Pulsa sobre la materia para cambiar su estado, esto
+            cambiara su color segun este sistema de colores:
+          </h3>
+          <ul class="setColorList">
+            <li>Gris: Materia No Cursada</li>
+            <li>Blanco: Materia cursada</li>
+            <li>Dorado: Materia Promocionada</li>
+          </ul>
+          <h3>
+            Modo View: Podes ver si te podes anotar a las distintas materias
+            segun su color:
+          </h3>
+          <ul class="viewColorList">
+            <li>Rojo: No podes anotarte</li>
+            <li>Amarillo: Podes anotarte pero no promocionar</li>
+            <li>Verde: Podes anotarte y promocionar</li>
+          </ul>
+          <h3>
+            Nota: Si intentas cambiar el estado de materias cuyas materias
+            anteriores no aprobaste, estas vibraran para indicarlo.
+          </h3>
+        </div>
+      </div>
+      <div class="setMode-container hide">
+        <div class="setMode golden-bg">
+          <p>Set</p>
+        </div>
+        <div class="viewMode grey-bg">
+          <p>View</p>
+        </div>
+      </div>
+      <h2 id="carrera-title"></h2>
+      <div class="carrera-container">
+        <!-- <div class="anio" id="anio1">
+          <p class="texto-anio"><span id="golden-span">Primer</span> Año</p>
+          <div class="materias-container">
+            <div class="materia">
+              <div class="info-container" id="info1">
+                <i class="fa-solid fa-circle-info info"></i>
+              </div>
+              <p class="materia-nombre" id="materia1">Bases de Datos</p>
+            </div>
+          </div>
+        </div> -->
+      </div>
+    </main>
+    <script src="./main.js"></script>
+  </body>
+</html>
