@@ -1,5 +1,5 @@
 //declaracion de carreras
-const tecnicaturaEnDesarolloWeb = [
+let tecnicaturaEnDesarolloWeb = [
   {
     nombre: "Programacion Básica 1",
     estadoSet: 0,
@@ -181,7 +181,7 @@ const tecnicaturaEnDesarolloWeb = [
     anio: 3,
   },
 ];
-const ingenieriaEnInformatica = [
+let ingenieriaEnInformatica = [
   {
     nombre: "Matematica Discreta",
     estadoSet: 0,
@@ -696,7 +696,7 @@ const ingenieriaEnInformatica = [
     anio: 5,
   },
 ];
-const expertoEnBoludos = [
+let expertoEnBoludos = [
   {
     nombre: "Deteccion de Boludos 1",
     estadoSet: 0,
@@ -717,7 +717,7 @@ const expertoEnBoludos = [
   },
 ];
 //declaracion de carreras de unis
-const carrerasUnlam = [
+let carrerasUnlam = [
   {
     nombre: "Tecnicatura en Desarrollo Web",
     variable: tecnicaturaEnDesarolloWeb,
@@ -727,14 +727,14 @@ const carrerasUnlam = [
     variable: ingenieriaEnInformatica,
   },
 ];
-const carrerasUba = [
+let carrerasUba = [
   {
     nombre: "Experto en Boludos",
     variable: expertoEnBoludos,
   },
 ];
 //declaracion de Universidades
-const universidades = [
+let universidades = [
   {
     acronimo: "UNLAM",
     nombre: "Universidad Nacional de La Matanza",
@@ -766,6 +766,10 @@ const tituloDeCarrera = document.querySelector("#carrera-title");
 const setModeBtn = document.querySelector(".setMode");
 const viewModeBtn = document.querySelector(".viewMode");
 const landingPage = document.querySelector(".landingPage");
+const blurDiv = document.querySelector(".blur-screen");
+const empezarBtn = document.querySelector(".empezarBtn");
+const instrucciones = document.querySelector(".instrucciones");
+const entendidoBtn = document.querySelector(".entendidoBtn");
 /*<div class="anio" id="anio1">
           <p class="texto-anio"><span id="golden-span">1°</span> Año</p>
           <div class="materias-container">
@@ -996,15 +1000,17 @@ const seleccionCarrera = (evento) => {
   let universidad = universidades.find((universidad) => {
     return universidad.acronimo == universidadString;
   });
+  console.log(universidad);
   let carreras = universidad.carreras;
   let carrera = carreras.find((carrera) => {
     return carrera.nombre == carreraString;
   });
+  console.log(carrera);
   carreraActual = carrera.variable;
   nombreCarreraActual = carrera.nombre;
   renderizarCarrera(carreraActual, nombreCarreraActual);
   setModeContainer.classList.remove("hide");
-  landingPage.classList.add("hide");
+  ocultarObjeto(landingPage);
 };
 const generarMenu = () => {
   let container = document.querySelector(".tituloYLista");
@@ -1041,19 +1047,41 @@ const generarMenu = () => {
   }
 };
 generarMenu();
+const ocultarObjeto = (objeto) => {
+  objeto.classList.add("hide-left");
+  setTimeout(() => {
+    objeto.classList.add("hide");
+  }, 100);
+};
+const mostrarObjeto = (objeto) => {
+  setTimeout(() => {
+    objeto.classList.remove("hide-left");
+    objeto.classList.remove("hide");
+  }, 200);
+};
+entendidoBtn.addEventListener("click", (evento) => {
+  ocultarObjeto(instrucciones);
+  mostrarMenu();
+});
+empezarBtn.addEventListener("click", (evento) => {
+  ocultarObjeto(landingPage);
+  mostrarObjeto(instrucciones);
+});
 const mostrarMenu = () => {
-  console.log("hola");
   showMenuBtn.classList.add("hide");
   closeMenuBtn.classList.remove("hide");
   carrerasListContainer.classList.remove("hide-right");
   carrerasListContainer.classList.add("slide-left");
+  blurDiv.classList.remove("hide");
 };
 const cerrarMenu = () => {
   showMenuBtn.classList.remove("hide");
   closeMenuBtn.classList.add("hide");
   carrerasListContainer.classList.remove("slide-left");
   carrerasListContainer.classList.add("hide-right");
+  blurDiv.classList.add("hide");
 };
+blurDiv.addEventListener("click", cerrarMenu);
 // tecnicaturaEnDesarolloWebSelector.addEventListener("click", () => {
 //   cerrarMenu();
 //   carreraActual = 0;
@@ -1073,4 +1101,35 @@ viewModeBtn.addEventListener("click", () => {
 setModeBtn.addEventListener("click", () => {
   changeModes();
   renderizarCarrera(carreraActual, nombreCarreraActual);
+});
+//Animacion para el titulo
+// script.js
+document.addEventListener("DOMContentLoaded", () => {
+  const titulo = document.getElementById("titulo-maquina-escribir");
+  const subtitulo = document.getElementById("subTitulo");
+  const texto = "Carrera <span class='golden-span'>Track</span>";
+  const textoSinEtiquetas = "Carrera Track";
+  const velocidad = 60; // Velocidad de escritura en milisegundos
+
+  const caretSpan = document.createElement("span");
+  caretSpan.className = "caret";
+  titulo.appendChild(caretSpan);
+
+  for (let i = 0; i <= textoSinEtiquetas.length; i++) {
+    setTimeout(() => {
+      // Construir el texto con etiquetas HTML
+      let parteVisible = textoSinEtiquetas.substring(0, i);
+
+      if (i > 7) {
+        // 7 es la longitud de "Carrera "
+        parteVisible =
+          "Carrera <span class='golden-span'>" +
+          textoSinEtiquetas.substring(8, i) +
+          "</span>";
+      }
+
+      titulo.innerHTML = parteVisible;
+      titulo.appendChild(caretSpan); // Volver a agregar la barra después de actualizar el texto
+    }, i * velocidad);
+  }
 });

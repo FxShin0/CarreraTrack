@@ -35,7 +35,6 @@
             <i class="fa-solid fa-circle-xmark"></i>
           </div>
         </div>
-        <div class="blur-screen hide"></div>
         <div class="carreras-list-container hide-right">
           <div class="tituloYLista">
             <h2>Elige tu carrera!</h2>
@@ -57,39 +56,44 @@
       </nav>
     </header>
     <main id="main">
+      <div class="blur-screen hide"></div>
       <div class="landingPage">
         <div class="title-description">
-          <h2>Carrera Track</h2>
-          <p>
+          <h2 id="titulo-maquina-escribir"></h2>
+          <p class="scale-in-center" id="subTitulo">
             Controla el progreso de tu carrera y descubri al instante que
             materias estan disponibles para anotarte!
           </p>
         </div>
-        <div class="instrucciones">
-          <h3>Instrucciones</h3>
-          <h3>
-            Modo Set: Pulsa sobre la materia para cambiar su estado, esto
-            cambiara su color segun este sistema de colores:
-          </h3>
-          <ul class="setColorList">
-            <li>Gris: Materia No Cursada</li>
-            <li>Blanco: Materia cursada</li>
-            <li>Dorado: Materia Promocionada</li>
-          </ul>
-          <h3>
-            Modo View: Podes ver si te podes anotar a las distintas materias
-            segun su color:
-          </h3>
-          <ul class="viewColorList">
-            <li>Rojo: No podes anotarte</li>
-            <li>Amarillo: Podes anotarte pero no promocionar</li>
-            <li>Verde: Podes anotarte y promocionar</li>
-          </ul>
-          <h3>
-            Nota: Si intentas cambiar el estado de materias cuyas materias
-            anteriores no aprobaste, estas vibraran para indicarlo.
-          </h3>
-        </div>
+        <div class="empezarBtn slide-in-blurred-bottom">Iniciar</div>
+      </div>
+      <div class="instrucciones hide hide-left">
+        <h2 class="golden-color">Instrucciones</h2>
+        <h3>
+          Modo Set: Pulsa sobre la materia para cambiar su estado, esto cambiara
+          su color segun este sistema de colores:
+        </h3>
+        <ul class="setColorList">
+          <li class="grey-bg">Gris: Materia No Cursada</li>
+          <li class="white-bg">Blanco: Materia cursada</li>
+          <li class="golden-bg">Dorado: Materia Promocionada</li>
+        </ul>
+        <h3>
+          Modo View: Podes ver si te podes anotar a las distintas materias segun
+          su color:
+        </h3>
+        <ul class="viewColorList">
+          <li class="red-bg">Rojo: No podes anotarte</li>
+          <li class="yellow-bg">
+            Amarillo: Podes anotarte pero no promocionar
+          </li>
+          <li class="green-bg">Verde: Podes anotarte y promocionar</li>
+        </ul>
+        <h3>
+          Nota: Si intentas cambiar el estado de materias cuyas materias
+          anteriores no aprobaste, estas vibraran para indicarlo.
+        </h3>
+        <div class="entendidoBtn">Entendido</div>
       </div>
       <div class="setMode-container hide">
         <div class="setMode golden-bg">
