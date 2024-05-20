@@ -1011,6 +1011,7 @@ const seleccionCarrera = (evento) => {
   renderizarCarrera(carreraActual, nombreCarreraActual);
   setModeContainer.classList.remove("hide");
   ocultarObjeto(landingPage);
+  ocultarObjeto(instrucciones);
 };
 const generarMenu = () => {
   let container = document.querySelector(".tituloYLista");
