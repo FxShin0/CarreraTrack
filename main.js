@@ -770,6 +770,7 @@ const blurDiv = document.querySelector(".blur-screen");
 const empezarBtn = document.querySelector(".empezarBtn");
 const instrucciones = document.querySelector(".instrucciones");
 const entendidoBtn = document.querySelector(".entendidoBtn");
+const logoAndName = document.querySelector(".logoAndName");
 /*<div class="anio" id="anio1">
           <p class="texto-anio"><span id="golden-span">1°</span> Año</p>
           <div class="materias-container">
@@ -1133,4 +1134,7 @@ document.addEventListener("DOMContentLoaded", () => {
       titulo.appendChild(caretSpan); // Volver a agregar la barra después de actualizar el texto
     }, i * velocidad);
   }
+});
+logoAndName.addEventListener("click", () => {
+  location.reload();
 });
