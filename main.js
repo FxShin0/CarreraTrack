@@ -884,7 +884,11 @@ const renderizarColores = (modo, carrera) => {
   if (modo == 1) {
     for (x = 0; x < carrera.length; x++) {
       materiaAct = document.querySelector(`#mat${carrera[x].codigo}`);
-      renderizarColorUnicaCaja(carrera[x].estadoSet, materiaAct);
+      renderizarColorUnicaCaja(
+        carrera[x].estadoSet,
+        materiaAct,
+        carrera[x].estadoCalc
+      );
     }
   } else {
     for (x = 0; x < carrera.length; x++) {
@@ -921,7 +925,11 @@ const setMode = (evento, carrera) => {
   });
   actualizarSetData(materiaClick, carrera);
   actualizarViewData(carrera); //nota: en algun momento capaz vendria bien hacer una funcion que lo calcule de manera individual, asi optimizamos un toque porque esta funcion esta pensada para el renderizado global...
-  renderizarColorUnicaCaja(materiaClick.estadoSet, evento.target);
+  renderizarColorUnicaCaja(
+    materiaClick.estadoSet,
+    evento.target,
+    materiaClick.estadoCalc
+  );
   renderizarColoresCorrelativasSet(materiaClick, carrera);
   animacionEnClick(evento.target, "heartbeatAnimacion", 100);
 };
@@ -934,7 +942,8 @@ const renderizarColoresCorrelativasSet = (materia, carrera) => {
       materiaDep2.estadoSet = 0;
       renderizarColorUnicaCaja(
         materiaDep2.estadoSet,
-        document.querySelector(`#mat${materiaDep2.codigo}`)
+        document.querySelector(`#mat${materiaDep2.codigo}`),
+        materiaDep2.estadoCalc
       );
     }
   });
@@ -966,7 +975,7 @@ const actualizarSetData = (materia, carrera) => {
   }
 };
 //ojo que materiaAct no es el objeto materia sino el elemento html asociado
-const renderizarColorUnicaCaja = (estadoSet, materiaAct) => {
+const renderizarColorUnicaCaja = (estadoSet, materiaAct, estadoCalc) => {
   materiaAct.classList.remove("grey-bg");
   materiaAct.classList.remove("white-bg");
   materiaAct.classList.remove("golden-bg");
@@ -978,10 +987,15 @@ const renderizarColorUnicaCaja = (estadoSet, materiaAct) => {
       materiaAct.classList.add("white-bg");
       break;
     case 2:
-      materiaAct.classList.add("golden-bg");
+      if (estadoCalc != 3) {
+        materiaAct.classList.add("golden-bg");
+      }
       break;
     default:
       break;
+  }
+  if (estadoCalc == 3) {
+    materiaAct.classList.add("grey-bg");
   }
 };
 const animacionEnClick = (materia, nombreClaseAnimacion, animacionTime) => {
@@ -1001,12 +1015,10 @@ const seleccionCarrera = (evento) => {
   let universidad = universidades.find((universidad) => {
     return universidad.acronimo == universidadString;
   });
-  console.log(universidad);
   let carreras = universidad.carreras;
   let carrera = carreras.find((carrera) => {
     return carrera.nombre == carreraString;
   });
-  console.log(carrera);
   carreraActual = carrera.variable;
   nombreCarreraActual = carrera.nombre;
   renderizarCarrera(carreraActual, nombreCarreraActual);

@@ -270,7 +270,7 @@
   -moz-transition: all 0.3s ease;
   -ms-transition: all 0.3s ease;
   -o-transition: all 0.3s ease;
-  /* min-height: calc(100vh - 60px); */
+  min-height: calc(100vh - 60px);
 }
 .carreras-list-container p {
   font-size: 17px;

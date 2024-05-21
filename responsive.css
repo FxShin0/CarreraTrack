@@ -31,5 +31,30 @@
   }
   #carrera-title {
     margin-top: 30px;
+    font-size: 40px;
+  }
+  .texto-anio {
+    font-size: 25px;
+  }
+}
+@media (max-width: 400px) {
+  /* Cambios al Navbar */
+  .logoAndName h1 {
+    font-size: 30px;
+  }
+  .logoAndName img {
+    height: 60%;
+    width: 30px;
+  }
+  .version-span {
+    font-size: 8px;
+  }
+  .materia {
+    width: 120px;
+    height: 65px;
+  }
+  #carrera-title {
+    margin-top: 30px;
+    font-size: 35px;
   }
 }
