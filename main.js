@@ -696,26 +696,6 @@ let ingenieriaEnInformatica = [
     anio: 5,
   },
 ];
-let expertoEnBoludos = [
-  {
-    nombre: "Deteccion de Boludos 1",
-    estadoSet: 0,
-    estadoCalc: 3,
-    horasSemanales: 8,
-    codigo: 2619,
-    correlativas: [null],
-    anio: 1,
-  },
-  {
-    nombre: "Deteccion de Boludos 2",
-    estadoSet: 0,
-    estadoCalc: 3,
-    horasSemanales: 8,
-    codigo: 2620,
-    correlativas: [2619],
-    anio: 2,
-  },
-];
 //declaracion de carreras de unis
 let carrerasUnlam = [
   {
@@ -727,12 +707,6 @@ let carrerasUnlam = [
     variable: ingenieriaEnInformatica,
   },
 ];
-let carrerasUba = [
-  {
-    nombre: "Experto en Boludos",
-    variable: expertoEnBoludos,
-  },
-];
 //declaracion de Universidades
 let universidades = [
   {
@@ -740,15 +714,12 @@ let universidades = [
     nombre: "Universidad Nacional de La Matanza",
     carreras: carrerasUnlam,
   },
-  {
-    acronimo: "UBA",
-    nombre: "Universidad de Buenos Aires",
-    carreras: carrerasUba,
-  },
 ];
+let nombreLocalGuar; //esto es para manejar el guardadoLocal
 //El resto del codigo
 let carreraActual;
-let nombreCarreraActual;
+let nombreCarreraLocal; //usaremos estos dos para manejar las demas funciones que renderizan carreras o que usen carreras como variable
+let carreraActualLocal;
 const showMenuBtn = document.querySelector("#show-menu");
 const closeMenuBtn = document.querySelector("#close-menu");
 const carrerasListContainer = document.querySelector(
@@ -771,6 +742,8 @@ const empezarBtn = document.querySelector(".empezarBtn");
 const instrucciones = document.querySelector(".instrucciones");
 const entendidoBtn = document.querySelector(".entendidoBtn");
 const logoAndName = document.querySelector(".logoAndName");
+const resetCarreraBtn = document.querySelector(".reset-btn");
+const goToInstructionsBtn = document.querySelector(".instructions-btn");
 /*<div class="anio" id="anio1">
           <p class="texto-anio"><span id="golden-span">1°</span> Año</p>
           <div class="materias-container">
@@ -924,7 +897,7 @@ const setMode = (evento, carrera) => {
     return idMateria == materia.codigo;
   });
   actualizarSetData(materiaClick, carrera);
-  actualizarViewData(carrera); //nota: en algun momento capaz vendria bien hacer una funcion que lo calcule de manera individual, asi optimizamos un toque porque esta funcion esta pensada para el renderizado global...
+  actualizarViewData(carreraActualLocal); //nota: en algun momento capaz vendria bien hacer una funcion que lo calcule de manera individual, asi optimizamos un toque porque esta funcion esta pensada para el renderizado global...
   renderizarColorUnicaCaja(
     materiaClick.estadoSet,
     evento.target,
@@ -932,6 +905,11 @@ const setMode = (evento, carrera) => {
   );
   renderizarColoresCorrelativasSet(materiaClick, carrera);
   animacionEnClick(evento.target, "heartbeatAnimacion", 100);
+  guardarProgreso(nombreLocalGuar, carrera);
+};
+//se refiere al set acronimo uni +nombre carrera
+const guardarProgreso = (nombre, carrera) => {
+  localStorage.setItem(nombre, JSON.stringify(carrera));
 };
 const renderizarColoresCorrelativasSet = (materia, carrera) => {
   let materiasDependientes = carrera.filter((materiaDep) => {
@@ -1019,10 +997,24 @@ const seleccionCarrera = (evento) => {
   let carrera = carreras.find((carrera) => {
     return carrera.nombre == carreraString;
   });
-  carreraActual = carrera.variable;
-  nombreCarreraActual = carrera.nombre;
-  renderizarCarrera(carreraActual, nombreCarreraActual);
+  carreraActual = carrera.variable; //carreraActual contiene la carrera en sí.
+  let nombreLocal = (carrera.nombre + "|" + universidad.acronimo).replace(
+    /\s+/g,
+    ""
+  );
+  if (localStorage.getItem(nombreLocal) == null) {
+    localStorage.setItem(nombreLocal, JSON.stringify(carreraActual));
+  }
+  carreraLocal = JSON.parse(localStorage.getItem(nombreLocal));
+  nombreLocalGuar = nombreLocal;
+  nombreCarreraLocal = carrera.nombre;
+  carreraActualLocal = carreraLocal;
+  renderizarCarrera(carreraActualLocal, nombreCarreraLocal);
   setModeContainer.classList.remove("hide");
+  resetCarreraBtn.classList.remove("hide");
+  carreraContainer.classList.remove("hide");
+  goToInstructionsBtn.classList.remove("hide");
+  tituloDeCarrera.classList.remove("hide");
   ocultarObjeto(landingPage);
   ocultarObjeto(instrucciones);
 };
@@ -1110,12 +1102,30 @@ showMenuBtn.addEventListener("click", mostrarMenu);
 closeMenuBtn.addEventListener("click", cerrarMenu);
 viewModeBtn.addEventListener("click", () => {
   changeModes();
-  renderizarCarrera(carreraActual, nombreCarreraActual);
+  renderizarCarrera(carreraActualLocal, nombreCarreraLocal);
 });
 setModeBtn.addEventListener("click", () => {
   changeModes();
-  renderizarCarrera(carreraActual, nombreCarreraActual);
+  renderizarCarrera(carreraActualLocal, nombreCarreraLocal);
 });
+const resetCarrera = () => {
+  carreraActualLocal = carreraActualLocal.map((materia) => {
+    materia.estadoSet = 0;
+    return materia;
+  });
+  guardarProgreso(nombreLocalGuar, carreraActualLocal);
+  renderizarCarrera(carreraActualLocal, nombreCarreraLocal);
+};
+const goToInstructions = () => {
+  carreraContainer.classList.add("hide");
+  instrucciones.classList.remove("hide-left", "hide");
+  setModeContainer.classList.add("hide");
+  resetCarreraBtn.classList.add("hide");
+  goToInstructionsBtn.classList.add("hide");
+  tituloDeCarrera.classList.add("hide");
+};
+goToInstructionsBtn.addEventListener("click", goToInstructions);
+resetCarreraBtn.addEventListener("click", resetCarrera);
 //Animacion para el titulo
 // script.js
 document.addEventListener("DOMContentLoaded", () => {

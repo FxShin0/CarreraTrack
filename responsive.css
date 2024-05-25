@@ -1,3 +1,8 @@
+@media (max-width: 847px) {
+  #carrera-title {
+    margin-top: 60px;
+  }
+}
 @media (max-width: 570px) {
   /* Cambios al Navbar */
   .logoAndName h1 {
@@ -30,7 +35,7 @@
     font-size: 12px;
   }
   #carrera-title {
-    margin-top: 30px;
+    margin-top: 70px;
     font-size: 40px;
   }
   .texto-anio {
@@ -54,7 +59,7 @@
     height: 65px;
   }
   #carrera-title {
-    margin-top: 30px;
+    margin-top: 70px;
     font-size: 35px;
   }
 }
