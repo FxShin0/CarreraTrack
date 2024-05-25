@@ -1096,7 +1096,7 @@ let arquitecturaUnm = [
     anio: 2,
   },
   {
-    nombre: "Historia de la Aquitectua y el Urbanismo 1",
+    nombre: "Historia de la Aquitectura y el Urbanismo 1",
     estadoSet: 0,
     estadoCalc: 3,
     horasSemanales: null,
@@ -1587,6 +1587,7 @@ const setMode = (evento, carrera) => {
 //se refiere al set acronimo uni +nombre carrera
 const guardarProgreso = (nombre, carrera) => {
   localStorage.setItem(nombre, JSON.stringify(carrera));
+  console.log(`Me ejecute guardando ${nombre}`);
 };
 const renderizarColoresCorrelativasSet = (materia, carrera) => {
   let materiasDependientes = carrera.filter((materiaDep) => {
