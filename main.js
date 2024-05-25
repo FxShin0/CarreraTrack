@@ -1587,7 +1587,6 @@ const setMode = (evento, carrera) => {
 //se refiere al set acronimo uni +nombre carrera
 const guardarProgreso = (nombre, carrera) => {
   localStorage.setItem(nombre, JSON.stringify(carrera));
-  console.log(`Me ejecute guardando ${nombre}`);
 };
 const renderizarColoresCorrelativasSet = (materia, carrera) => {
   let materiasDependientes = carrera.filter((materiaDep) => {
