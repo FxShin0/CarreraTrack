@@ -1096,7 +1096,7 @@ let arquitecturaUnm = [
     anio: 2,
   },
   {
-    nombre: "Historia de la Aquitectura y el Urbanismo 1",
+    nombre: "Historia de la Arquitectura y el Urbanismo 1",
     estadoSet: 0,
     estadoCalc: 3,
     horasSemanales: null,
